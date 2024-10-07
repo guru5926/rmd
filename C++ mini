@@ -1,0 +1,44 @@
+#include <sstream> // For string stream
+using namespace std;
+
+double callu(string expression) {
+    stringstream expp(expression);
+    double result = 0;
+    char op = '+';
+    while (expp) {
+        double num;
+        char al;
+        expp >> num; // Read the next number
+        expp >> al;  // Read the next operator
+        switch (op) {
+            case '+':
+                result += num; // Add the number to result
+                break;
+            case '-':
+                result -= num; // Subtract the number from result
+                break;
+            case '*':
+                result *= num; // Multiply the result by the number
+                break;
+            case '/':
+                if (num != 0.0) {
+                    result /= num; // Divide the result by the number
+                } else {
+                    cout << "Error! Division by zero." << endl;
+                    return 0.0; // Return 0 on division by zero
+                }
+                break;
+        }
+        op = al; // Update the operator for the next iteration
+    }
+    return result; // Return the final result
+}
+
+int main() {
+    string a1;
+    cout << "Enter an arithmetic expression (e.g., 1+3-4*2): ";
+    getline(cin, a1); // Get the entire line of input
+    double result = callu(a1); // Call the evaluation function
+    cout << "Result: " << result << endl; // Output the result
+    return 0;
+}
